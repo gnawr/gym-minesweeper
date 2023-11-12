@@ -7,8 +7,8 @@ import gym
 from gym import spaces
 
 # default : easy board
-BOARD_SIZE = 10
-NUM_MINES = 9
+BOARD_SIZE = 5
+NUM_MINES = 4
 
 # cell values, non-negatives indicate number of neighboring mines
 MINE = -1
