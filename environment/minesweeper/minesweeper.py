@@ -425,7 +425,7 @@ class MinesweeperDiscreetEnv(gym.Env):
                 if is_win(state):
                     return state, 1000, True, {}
                 else:
-                    return state, 0, False, {}
+                    return state, -1, False, {}
             else:
                 return state, -100, True, {}
 
