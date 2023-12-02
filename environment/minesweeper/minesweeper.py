@@ -418,15 +418,18 @@ class MinesweeperDiscreetEnv(gym.Env):
         """
         my_board = state
         if not is_new_move(my_board, x, y):
-            return my_board, 0, False, {}
+            return my_board, -100, False, {}
         while True:
             state, game_over = self.get_next_state(my_board, x, y)
             if not game_over:
                 if is_win(state):
+                    print("is win reward 1000")
                     return state, 1000, True, {}
                 else:
-                    return state, -1, False, {}
+                    print("game not over reward 5")
+                    return state, 5, False, {}
             else:
+                print("reward -100")
                 return state, -100, True, {}
 
     def render(self, mode='human'):

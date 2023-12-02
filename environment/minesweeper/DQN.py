@@ -8,11 +8,11 @@ new_obs = env.reset()
 
 model = DQN("MlpPolicy", env, verbose=1)
 model.learn(total_timesteps=3000000, log_interval=4, progress_bar=True)
-model.save("dqn")
+# model.save("dqn")
 
 # del model # remove to demonstrate saving and loading
 
-# model = DQN.load("dqn_cartpole")
+# model = DQN.load("dqn")
 
 # obs, info = env.reset()
 # while True:
@@ -41,16 +41,21 @@ while curr_game_iter < NUM_GAMES:
     print(f'Action: {action}')
 
     new_obs, reward, done, info = env.step(action)
+    print("new obs: \n", new_obs)
+    print("reward: ", reward)
     curr_game_reward += reward
     step_i += 1
 
     if done:
+        print("done")
         outcomes.append(ms.is_win(new_obs))
         rewards.append(curr_game_reward)
 
         obs = env.reset()
         curr_game_iter += 1
         curr_game_reward = 0
+        # model = DQN("MlpPolicy", env, verbose=1)
+        # model.learn(total_timesteps=10000, log_interval=4, progress_bar=True)
 
 print("Strategy: DQN")
 print("Number of games played: {}".format(len(outcomes)))
