@@ -16,9 +16,10 @@ def greedy_exploration(env, action_space, action_vals, epsilon):
             action = action_space.sample()
         return action 
     else:
+        # print("here", np.unravel_index(action_vals.argmax(), action_vals.shape), action_vals)
         return np.unravel_index(action_vals.argmax(), action_vals.shape)
 
-def run():
+def run():  
     print("Starting run")
     env = ms.MinesweeperEnv()
     action_space = env.action_space
@@ -40,19 +41,20 @@ def run():
 
         done = False 
         while not done:
-            next_state, reward, done, _ = env.step((curr_action[0], curr_action[1]))
 
+            next_state, reward, done, _ = env.step((curr_action[0], curr_action[1]))
+            
             next_state_str = ms.board2str(next_state)
             if next_state_str not in Q_vals.keys():
-               Q_vals[next_state_str] = np.zeros((ms.BOARD_SIZE, ms.BOARD_SIZE))
+                Q_vals[next_state_str] = np.zeros((ms.BOARD_SIZE, ms.BOARD_SIZE))
 
             action_vals = np.copy(Q_vals[next_state_str])
             action_vals[state != -2] = -float('inf')
-
+            
             next_action = greedy_exploration(env, action_space, action_vals, epsilon)
-
             q_val = Q_vals[state_str][curr_action[0]][curr_action[1]]
-            q_val_next = Q_vals[next_state_str][next_action[0]][next_action[1]]
+            
+            q_val_next = np.max(Q_vals[next_state_str])
             update = reward + gamma*q_val_next-q_val
             Q_vals[state_str][curr_action[0]][curr_action[1]] = q_val + alpha*update 
 
@@ -66,7 +68,6 @@ def run():
                     Q_vals[state_str] = np.zeros((ms.BOARD_SIZE, ms.BOARD_SIZE))
                 action_vals = np.copy(Q_vals[state_str])
                 action_vals[state != -2] = -float('inf')
-
         # epsilon = max(0.01, epsilon*0.999)
 
     return Q_vals

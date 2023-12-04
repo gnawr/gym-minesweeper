@@ -168,7 +168,7 @@ class MinesweeperEnv(gym.Env):
                 my_board = self.open_neighbour_cells(my_board, x, y)
         self.my_board = my_board
         return my_board, game_over
-
+    
     def reset(self):
         """
         Reset a new game episode. See gym.Env.reset()
