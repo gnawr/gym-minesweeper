@@ -423,13 +423,13 @@ class MinesweeperDiscreetEnv(gym.Env):
             state, game_over = self.get_next_state(my_board, x, y)
             if not game_over:
                 if is_win(state):
-                    print("is win reward 1000")
+                    # print("is win reward 1000")
                     return state, 1000, True, {}
                 else:
-                    print("game not over reward 5")
+                    # print("game not over reward 5")
                     return state, 5, False, {}
             else:
-                print("reward -100")
+                # print("reward -100")
                 return state, -100, True, {}
 
     def render(self, mode='human'):

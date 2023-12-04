@@ -4,5 +4,8 @@ MinesweeperDiscreet_v0.egg-info/SOURCES.txt
 MinesweeperDiscreet_v0.egg-info/dependency_links.txt
 MinesweeperDiscreet_v0.egg-info/requires.txt
 MinesweeperDiscreet_v0.egg-info/top_level.txt
+minesweeper/DQN.py
+minesweeper/MCTS.py
 minesweeper/__init__.py
 minesweeper/minesweeper.py
+minesweeper/random_policy.py
